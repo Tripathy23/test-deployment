@@ -1,0 +1,27 @@
+- name: configuring webserver and deploying index.html file
+hosts: webserver
+become: yes
+tasks: 
+  - name: ensure Apache2 server installed
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
+  - namae: deploying custom index.html
+    copy:
+      content: "welcome to our site"
+      dest: /var/www/html/index.html
+      mode: 0644
+      notify: restart appache
+  -name: start the httpd service
+    service: 
+      name: apache2
+      state: started
+      enabled: yes
+
+handlers:
+  - name: restart apache2
+    service: 
+      name: apache2
+      state: restarted
+    
