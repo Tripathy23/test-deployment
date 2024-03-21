@@ -2,7 +2,7 @@
 hosts: webserver
 become: yes
 tasks: 
-  - name: ensure apache2 server installed
+  - name: ensure httpd server installed
     apt:
       name: httpd
       state: present
@@ -12,7 +12,7 @@ tasks:
       content: "welcome to our site"
       dest: /var/www/html/index.html
       mode: 0644
-      notify: restart apache
+      notify: restart httpd
   - name: start the httpd service
     service: 
       name: httpd
@@ -20,7 +20,7 @@ tasks:
       enabled: yes
 
 handlers:
-  - name: restart apache2
+  - name: restart httpd
     service: 
       name: httpd
       state: restarted
