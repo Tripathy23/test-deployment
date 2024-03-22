@@ -1,5 +1,5 @@
 - name: configuring webserver and deploying index.html file
-hosts: webserver
+hosts: webnodes
 become: yes
 tasks: 
   - name: ensure httpd server installed
